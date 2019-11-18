@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SketchPicker } from 'react-color';
 
-class SVColorPicker extends Component {
+class ColorPicker extends Component {
   constructor(props) {
     super(props);
     
@@ -77,4 +77,4 @@ class SVColorPicker extends Component {
   }
 }
 
-export default SVColorPicker;
+export default ColorPicker;

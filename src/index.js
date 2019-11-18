@@ -1,47 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SVColorPicker from './components/SVColorPicker';
+import SVColorPicker from './SVColorPicker';
+window.SVColorPicker = SVColorPicker;
 
-function getRGB(color){
-    var c;
-
-    // Color is hex
-    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)){
-        c= color.substring(1).split('');
-        if(c.length== 3){
-            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-        }
-        c= '0x'+c.join('');
-        return ''+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1';
-    }
-
-    return color;
-}
-
-function renderColorPicker( id, color, colorPalette ) {
-    const element = jQuery( '[id="' + id + '"]' );
-    const rootElement = element.parent();
-
-    // Output
-    ReactDOM.render(
-        <SVColorPicker id={ id } color={ getRGB( color ? color : '0,0,0,1' ) } colorPalette={ colorPalette } />, 
-        rootElement[0]
-    );
-}
-
-// Loops through the registered color settings and replaces them with the GB color picker
-function loadColorPicker() {
-    if ( Object.keys( sv_core_color_picker ).length > 0 ) {
-        for (const [key, value] of Object.entries( sv_core_color_picker ) ) {
-            if ( key !== 'color_palette' ) {
-                const colorPalette = sv_core_color_picker.color_palette ? sv_core_color_picker.color_palette : false;
-
-                renderColorPicker( key, value, colorPalette );
-            }
-        }
-    }
-}
-
+// For Settin Groups
 jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
     const parent            = jQuery( this ).parents( '.sv_setting_group_parent' );
     const entries		    = parent.find( '.sv_setting_group' );
@@ -62,9 +24,9 @@ jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
             const defaultColor = '0,0,0,1';
             const colorPalette = sv_core_color_picker.color_palette ? sv_core_color_picker.color_palette : false;
 
-            renderColorPicker( id, defaultColor, colorPalette );
+            SVColorPicker.renderColorPicker( id, defaultColor, colorPalette );
         });
     }
 });
 
-loadColorPicker();
+jQuery( document ).ready( SVColorPicker.loadColorPicker() );
