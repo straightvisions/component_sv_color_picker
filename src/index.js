@@ -18,7 +18,7 @@ jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
 		}
     } );
 
-    if ( color_settings ) {
+    if ( color_settings && typeof sv_core_color_picker !== 'undefined' ) {
         color_settings.each( function() {
             const id = jQuery( this ).attr('id').replace("sv_form_field_index", index );
             const defaultColor = '0,0,0,1';
@@ -29,4 +29,8 @@ jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
     }
 });
 
-jQuery( document ).ready( SVColorPicker.loadColorPicker() );
+jQuery( document ).ready( function() {
+    if ( SVColorPicker && typeof sv_core_color_picker !== 'undefined' ) {
+        SVColorPicker.loadColorPicker();
+    }
+} );
