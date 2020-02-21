@@ -34,6 +34,13 @@ class ColorPicker extends Component {
     };
   }
 
+  updateColorDisplay() {
+    const colorDisplay = jQuery( `[data-sv_field_id="${this.state.id}"] .sv_setting_color_value` );
+    const value = `rgba(${this.state.color.r},${this.state.color.g},${this.state.color.b},${this.state.color.a})`;
+
+    colorDisplay.css('background-color', value);
+  }
+
   rgbToHex = (rgb) => { 
     let hex = Number( rgb ).toString(16);
 
@@ -54,6 +61,7 @@ class ColorPicker extends Component {
 
   handleChangeComplete = ( color ) => {
     this.setState({ color: color.rgb });
+    this.updateColorDisplay();
   }
   
   render() {
