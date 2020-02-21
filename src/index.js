@@ -24,7 +24,7 @@ jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
             const defaultColor = '0,0,0,1';
             const colorPalette = sv_core_color_picker.color_palette ? sv_core_color_picker.color_palette : false;
 
-            SVColorPicker.renderColorPicker( id, defaultColor, colorPalette );
+            SVColorPicker.renderColorPicker( id, defaultColor, true, colorPalette );
         });
     }
 });

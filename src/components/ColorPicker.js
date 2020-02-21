@@ -31,14 +31,16 @@ class ColorPicker extends Component {
       id: props.id,
       color: colorObject,
       presetColors: presetColors,
+      rootElement: props.rootElement,
     };
   }
 
   updateColorDisplay() {
-    const colorDisplay = jQuery( `[data-sv_field_id="${this.state.id}"] .sv_setting_color_value` );
+    const colorDisplay = jQuery( this.state.rootElement ).parent().find( '.sv_setting_header .sv_setting_color_value' );
     const value = `rgba(${this.state.color.r},${this.state.color.g},${this.state.color.b},${this.state.color.a})`;
 
     colorDisplay.css('background-color', value);
+
   }
 
   rgbToHex = (rgb) => { 

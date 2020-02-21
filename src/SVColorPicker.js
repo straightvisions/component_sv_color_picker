@@ -18,15 +18,20 @@ export default {
     },
     
     renderColorPicker: function ( id, color, colorPalette ) {
-        const element = jQuery( '[id="' + id + '"]' );
-    
-        if ( element.length > 0 ) {
-            const rootElement = element.parent();
+        const inputElement = jQuery( '[id="' + id + '"]' );
+
+        if ( inputElement.length > 0 ) {
+            const rootElement = inputElement.parent();
     
            if ( rootElement.length > 0 ) {
                 // Output
                 ReactDOM.render(
-                    <ColorPicker id={ id } color={ this.getRGB( color ? color : '0,0,0,1' ) } colorPalette={ colorPalette } />, 
+                    <ColorPicker 
+                        id={ id }
+                        color={ this.getRGB( color ? color : '0,0,0,1' ) } 
+                        colorPalette={ colorPalette }
+                        rootElement={ rootElement[0] }
+                    />, 
                     rootElement[0]
                 );
            }
@@ -36,11 +41,12 @@ export default {
     // Loops through the registered color settings and replaces them with the GB color picker
     loadColorPicker: function () {
         if ( Object.keys( sv_core_color_picker ).length > 0 ) {
-            for (const [key, value] of Object.entries( sv_core_color_picker ) ) {
+            for (const [key, color] of Object.entries( sv_core_color_picker ) ) {
+   
                 if ( key !== 'color_palette' ) {
                     const colorPalette = sv_core_color_picker.color_palette ? sv_core_color_picker.color_palette : false;
-    
-                    this.renderColorPicker( key, value, colorPalette );
+
+                    this.renderColorPicker( key, color, colorPalette );
                 }
             }
         }
