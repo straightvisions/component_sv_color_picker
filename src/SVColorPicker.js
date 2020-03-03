@@ -1,6 +1,7 @@
 import ColorPicker from './components/ColorPicker';
 
 export default {
+    // Returns the color value as RGB format
     getRGB: function (color) {
         var c;
     
