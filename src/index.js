@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import SVColorPicker from './SVColorPicker';
 window.SVColorPicker = SVColorPicker;
 
-// For Settin Groups
+// For Setting Groups
 jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
     const parent            = jQuery( this ).parents( '.sv_setting_group_parent' );
     const entries		    = parent.find( '.sv_setting_group' );
@@ -31,6 +31,6 @@ jQuery( 'body' ).on( 'click','.sv_setting_group_add_new_button', function() {
 
 jQuery( document ).ready( function() {
     if ( SVColorPicker && typeof sv_core_color_picker !== 'undefined' ) {
-        SVColorPicker.loadColorPicker();
+        SVColorPicker.loadColorPicker( sv_core_color_picker );
     }
 } );

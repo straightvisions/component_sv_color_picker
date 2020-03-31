@@ -14,17 +14,11 @@ class ColorPicker extends Component {
 
     // Turns the color palette array into an presetColors array
     const presetColors = [];
-
-    if ( props.colorPalette ) {
-      for ( const key in props.colorPalette ) {
-          // skip loop if the property is from prototype
-          if ( ! props.colorPalette.hasOwnProperty( key ) ) continue;
-      
-          const c = props.colorPalette[key];
-          const color = this.fullColorHex( c.color.split(',')[0], c.color.split(',')[1], c.color.split(',')[2] );
-
-          presetColors.push({ title: c.name, color: color });
-      }
+    
+    if ( props.colorPalette && props.colorPalette.length > 0 ) {
+      props.colorPalette.map( c => {
+        presetColors.push({ title: c.name ? c.name : c.color, color: c.color });
+      } );
     }
 
     this.state = {
@@ -40,7 +34,6 @@ class ColorPicker extends Component {
     const value = `rgba(${this.state.color.r},${this.state.color.g},${this.state.color.b},${this.state.color.a})`;
 
     colorDisplay.css('background-color', value);
-
   }
 
   rgbToHex = (rgb) => { 

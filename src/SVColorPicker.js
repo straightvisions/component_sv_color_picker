@@ -40,12 +40,12 @@ export default {
     },
     
     // Loops through the registered color settings and replaces them with the GB color picker
-    loadColorPicker: function () {
-        if ( Object.keys( sv_core_color_picker ).length > 0 ) {
-            for (const [key, color] of Object.entries( sv_core_color_picker ) ) {
+    loadColorPicker: function ( color_picker ) {
+        if ( Object.keys( color_picker ).length > 0 ) {
+            for (const [key, color] of Object.entries( color_picker ) ) {
    
                 if ( key !== 'color_palette' ) {
-                    const colorPalette = sv_core_color_picker.color_palette ? sv_core_color_picker.color_palette : false;
+                    const colorPalette = color_picker.color_palette ? color_picker.color_palette : false;
 
                     this.renderColorPicker( key, color, colorPalette );
                 }
